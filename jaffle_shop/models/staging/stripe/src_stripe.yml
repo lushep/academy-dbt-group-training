@@ -1,0 +1,9 @@
+sources:
+  - name: stripe
+    description: This data comes from the stripe app
+    project: sql-training-422508  
+    dataset: stripe
+    tables:
+      - name: payments
+        description: One row represents one payment
+        identifier : payments_12c04

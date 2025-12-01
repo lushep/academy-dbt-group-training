@@ -1,0 +1,7 @@
+models:
+  - name: fct_orders
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
