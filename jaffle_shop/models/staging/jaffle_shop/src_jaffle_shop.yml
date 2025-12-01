@@ -1,0 +1,48 @@
+sources:
+  - name: jaffle_shop
+    description: This data comes from the Jaffle order app
+    project: sql-training-422508
+    dataset: jaffle
+    tables:
+      - name: customers
+        description: One row represents one customer
+        identifier: customers
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
+          - name: first_name
+            data_type: string
+          - name: last_name
+            data_type: string
+      - name: orders
+        description: One row represents one order
+        identifier: orders
+        columns:
+          - name: id
+            description: unique non null primary key
+            data_type: integer
+            data_tests:
+              - unique
+              - not_null
+          - name: user_id
+            data_type: integer
+            data_tests:
+              - not_null
+              - relationships:
+                  field: id
+                  to: source('jaffle_shop', 'customers')
+          - name: order_date
+            data_type: date
+          - name: status
+            description: "{{ doc('order_status')}}"
+            data_type: string
+            data_tests:
+              - accepted_values:
+                  values:
+                    - completed
+                    - returned
+                    - shipped
+                    - placed
+                    - return_pending

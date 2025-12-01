@@ -1,0 +1,14 @@
+models:
+  - name: fct_orders
+    description: Aggregation of total amount per order per customer
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        data_tests:
+          - not_null
+      - name: amount
+        data_tests:
+          - not_null
