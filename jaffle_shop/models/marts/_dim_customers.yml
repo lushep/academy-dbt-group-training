@@ -1,0 +1,9 @@
+models:
+  - name: dim_customers
+    description: One row represents one customer. This table has some metrics.
+    columns:
+      - name: customer_id
+        description: This is the primary key.
+        data_tests:
+          - unique
+          - not_null
