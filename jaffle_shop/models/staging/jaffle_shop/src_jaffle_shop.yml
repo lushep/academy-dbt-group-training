@@ -1,0 +1,31 @@
+sources:
+  - name: jaffle_shop
+    description: this data comes from the Jaffle-ator app
+    project: sql-training-422508    
+    dataset: jaffle
+    tables:
+      - name: orders # what I want it to be called in my project
+        description: one row represents one order
+        identifier: orders # exact match in the warehouse
+        columns:
+          - name: id
+            data_tests:
+              - not_null
+              - unique
+          - name: status
+            description: "{{doc('order_status')}}"
+            data_tests:
+            - accepted_values:
+                values:
+                  - completed
+                  - returned
+                  - shipped
+                  - placed
+                  - return_pending
+      - name: customers
+        identifier: customers
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
