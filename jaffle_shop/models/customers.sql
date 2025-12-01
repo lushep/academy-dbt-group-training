@@ -4,7 +4,7 @@ with customers as (
         id as customer_id,
         first_name,
         last_name
-    from data_warehousing.raw_customers
+    from jaffle.customers
 
 ),
 
@@ -16,7 +16,7 @@ orders as (
         order_date,
         status
 
-    from data_warehousing.raw_orders
+    from jaffle.orders
 
 ),
 
