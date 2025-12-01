@@ -4,7 +4,7 @@ with customers as (
         id as customer_id,
         first_name,
         last_name
-    from raw.jaffle_shop.customers
+    from data_warehousing.raw_customers
 
 ),
 
@@ -16,7 +16,7 @@ orders as (
         order_date,
         status
 
-    from raw.jaffle_shop.orders
+    from data_warehousing.raw_orders
 
 ),
 
@@ -30,7 +30,7 @@ customer_orders as (
         max(orders.order_date) as most_recent_order_date,
         count(orders.order_id) as number_of_orders
 
-    from orders orders 
+    from orders orders
 
     group by 1
 
