@@ -1,0 +1,10 @@
+models:
+  - name: dim_customer
+    description: one row reprsents one coustomer
+    columns:
+      - name: customer_id
+        description: this is the PK
+        data_tests:
+          - relationships:
+              to: ref('stg_jaffle_shop_customers')
+              field: customer_id

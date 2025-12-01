@@ -1,0 +1,10 @@
+sources:
+  - name: stripe
+    description: data coming from stripe
+    project: sql-training-422508  
+    dataset: stripe 
+    tables:
+      - name: payments
+        identifier: payments_12c04 #optional exact macth in warehosue
+        description: one row represents one payment
+          

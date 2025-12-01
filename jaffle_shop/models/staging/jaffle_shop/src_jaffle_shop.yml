@@ -1,0 +1,24 @@
+sources:
+  - name: jaffle_shop
+    description: data coming from Jaffle App
+    project: sql-training-422508  
+    dataset: jaffle 
+    tables:
+      - name: orders 
+        identifier: orders #optional exact macth in warehosue
+        description: one row represents one order
+        columns:
+        - name: status
+          description: "{{ doc('order_status')}}"
+          data_tests:
+          - accepted_values:
+              values: ['completed','returned','placed','shipped', 'return_pending']
+      - name: customers
+        description: bla,bla....
+        identifier: customers
+        columns:
+        - name: id
+          data_tests:
+            - unique
+            - not_null
+          
