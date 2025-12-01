@@ -1,0 +1,24 @@
+sources:
+  - name: jaffle_shop
+    project: sql-training-422508  
+    schema: jaffle 
+    tables:
+      - name: orders
+        identifier: orders
+        columns:
+          - name: id
+            data_tests:
+            - not_null
+            - unique
+          - name: status
+            data_tests:
+              - accepted_values:
+                  values:
+                    - completed
+                    - returned
+                    - shipped
+                    - placed
+                    - return_pending
+        
+      - name: customers
+        identifier: customers

@@ -1,25 +1,23 @@
 with customers as (
 
-    select
-        id as customer_id,
-        first_name,
-        last_name
-    from jaffle.customers
+select * from {{ ref('stg_jaffle_shop__customers') }}
 
 ),
 
 orders as (
 
-    select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
-
-    from jaffle.orders
+select * from dbt_jklingenberg.stg_jaffle_shop__orders
 
 ),
 
+payments as (
+    SELECT * FROM {{ ref('stg_stripe_payments') }}
+),
+
+factorders as (
+    SELECT * FROM 
+    {{ ref('fct_orders') }}
+),
 
 customer_orders as (
 
@@ -37,7 +35,7 @@ customer_orders as (
 ),
 
 
-final as (
+intermediate_final as (
 
     select
         customers.customer_id,
@@ -46,11 +44,19 @@ final as (
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
         coalesce(customer_orders.number_of_orders, 0) as number_of_orders
-
     from customers
-
     left join customer_orders using (customer_id)
 
+),
+
+final as
+(
+    SELECT intermediate_final.*, 
+            SUM(factorders.amount) as customer_lifetime_value
+    FROM intermediate_final
+    JOIN factorders
+    on intermediate_final.customer_id = factorders.customer_id
+    GROUP BY ALL
 )
 
 select * from final
