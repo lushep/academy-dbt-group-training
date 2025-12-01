@@ -1,0 +1,24 @@
+sources:
+  - name: jaffle_shop
+    project: sql-training-422508  
+    dataset: jaffle 
+    tables:
+      - name: orders # what I want to be called in my project
+        identifier: orders #exact match in the warehouse - this is optional
+        columns:
+          - name: status
+            data_tests:
+              - accepted_values:
+                  values:
+                    - completed
+                    - returned
+                    - shipped
+                    - placed
+                    - return_pending
+      - name: customers # what I want to be called in my project
+        identifier: customers #exact match in the warehouse - this is optional
+        columns:
+          - name: id
+            data_tests:
+            - unique
+            - not_null

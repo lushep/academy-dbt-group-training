@@ -1,0 +1,19 @@
+sources:
+  - name: stripe
+    project: sql-training-422508  
+    dataset: stripe 
+    tables:
+      - name: payments
+        identifier: payments_12c04
+        columns:
+          - name: payments_id
+            data_tests:
+              - not_null
+              - unique
+          - name: order_id
+            data_tests:
+              - not_null
+          - name: payment_method
+            data_tests:
+              - not_null
+              
