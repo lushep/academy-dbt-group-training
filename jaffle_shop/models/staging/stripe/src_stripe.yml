@@ -1,0 +1,20 @@
+sources:
+  - name: stripe
+    project: sql-training-422508
+    dataset: stripe
+    tables:
+      - name: payments
+        identifier: payments_12c04
+        description: These are payments for jaffle orders. Multiple payments per order is possible.
+        columns:
+          - name: payment_id
+            data_tests:
+              - unique
+          - name: payment_method
+            data_tests:
+              - accepted_values:
+                  values:
+                    - bank_transfer
+                    - coupon
+                    - credit_card
+                    - gift_card           

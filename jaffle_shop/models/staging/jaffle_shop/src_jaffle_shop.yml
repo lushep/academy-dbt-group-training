@@ -1,0 +1,42 @@
+sources:
+  - name: jaffle_shop
+    project: sql-training-422508
+    dataset: jaffle
+    tables:
+      - name: orders
+        description: 'the orders for jaffles'
+        identifier: orders
+        columns:
+          - name: id
+            description: this is the primary key
+            data_tests:
+              - unique
+              - not_null
+          - name: status
+            description: "{{ doc('order_status') }}" 
+            data_tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values:
+                      - completed
+                      - returned
+                      - shipped
+                      - placed
+                      - return_pending
+          - name: user_id
+            data_tests:
+              - relationships:
+                  arguments:
+                    field: id
+                    to: source("jaffle_shop", "customers")
+                  config:
+                    error_if: '>100000'
+                    warn_if: '>0'
+      - name: customers
+        identifier: customers
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
