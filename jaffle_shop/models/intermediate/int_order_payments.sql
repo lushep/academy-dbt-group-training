@@ -1,3 +1,9 @@
+{{
+	config(
+		materialized='ephemeral'
+	)
+}}
+
 {% set payment_methods = dbt_utils.get_column_values(ref("stg__stripe"), 'payment_method') %}
 
 select 
