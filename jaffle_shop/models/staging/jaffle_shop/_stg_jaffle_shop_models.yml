@@ -20,12 +20,20 @@ models:
                 - placed
                 - returned
                 - return_pending
-      - name: customer_id
+      - name: order_id
         data_tests:
           - relationships:
-              field: order_id
+              field: customer_id
               to: ref('stg_jaffle_shop__customers')
-          
+  - name: stg_stripe_payments
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        data_tests:
+          - not_null
 
 
         
