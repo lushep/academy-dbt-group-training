@@ -1,4 +1,4 @@
-{% set payment_methods = {{ distinct_payment_methods() }} %}
+{% set payment_methods = distinct_payment_methods() %}
 
 
 select 
