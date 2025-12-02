@@ -25,7 +25,7 @@ select
     orders.order_id,
     orders.customer_id,
     payments.payment_amount,
-    int_orders_payments.credit_card
+    int_orders_payments.credit_card, bank_transfer, coupon, gift_card
     from orders
     left join payments on payments.order_id = orders.order_id
     left join int_orders_payments on int_orders_payments.order_id = payments.order_id
