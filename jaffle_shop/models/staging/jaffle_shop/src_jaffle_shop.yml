@@ -12,6 +12,10 @@ sources:
             data_tests:
               - unique
               - not_null
+          - name: order_date
+            tests:
+              - dbt_utils.expression_is_true:
+                  expression: "<= CURRENT_DATE()"
           - name: status
             description: "{{ doc('order_status') }}" 
             data_tests:
