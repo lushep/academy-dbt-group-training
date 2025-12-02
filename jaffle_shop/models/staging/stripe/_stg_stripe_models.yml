@@ -20,4 +20,5 @@ models:
                 - coupon
                 - credit_card
                 - gift_card
+          - dbt_utils.at_least_one
       - name: payment_amount
