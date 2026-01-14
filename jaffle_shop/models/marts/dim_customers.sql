@@ -1,22 +1,28 @@
 with customers as (
 
     select
-        id as customer_id,
-        first_name,
-        last_name
-    from  `sql-training-422508.jaffle_shop.customers`
+        *
+    from  {{ ref('stg_jaffle_shop__customers') }}
 
 ),
 
 orders as (
 
     select
-        id as order_id,
-        user_id as customer_id,
-        order_date,
-        status
+        *
 
-    from  `sql-training-422508.jaffle_shop.orders`
+    from  {{ ref('stg_jaffle_shop__orders') }}
+
+),
+
+
+
+payments as (
+
+    select
+        *
+
+    from  {{ ref('stg_stripe__payments') }}
 
 ),
 
@@ -37,6 +43,20 @@ customer_orders as (
 ),
 
 
+customer_payments as (
+
+    select
+        orders.customer_id,
+        sum(payments.payment_amount) as customer_lifetime_value
+
+    from payments
+    left join orders using (order_id)
+
+    group by 1
+
+),
+
+
 final as (
 
     select
@@ -45,11 +65,13 @@ final as (
         customers.last_name,
         customer_orders.first_order_date,
         customer_orders.most_recent_order_date,
-        coalesce(customer_orders.number_of_orders, 0) as number_of_orders
+        coalesce(customer_orders.number_of_orders, 0) as number_of_orders,
+        customer_payments.customer_lifetime_value
 
     from customers
 
     left join customer_orders using (customer_id)
+    left join customer_payments using (customer_id)
 
 )
 
