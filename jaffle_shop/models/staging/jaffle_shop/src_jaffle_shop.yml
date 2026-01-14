@@ -1,0 +1,21 @@
+sources:
+  - name: jaffle_shop
+    project: sql-training-422508
+    dataset: jaffle_shop
+    tables:
+      - name: customers
+        identifier: customers # the exact name in the data warehouse
+        columns:
+          - name: user_id
+            data_tests:
+            - relationships:
+                to: source('jaffle_shop', 'customers')
+                field: id
+
+          - name: id
+            data_tests:
+              - unique
+              - not_null
+      - name: orders
+        identifier: orders
+

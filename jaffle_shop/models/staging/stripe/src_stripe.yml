@@ -1,0 +1,8 @@
+sources:
+  - name: stripe
+    project: sql-training-422508
+    dataset: stripe
+    tables:
+      - name: payments
+        identifier: payments # the exact name in the data warehouse
+        
