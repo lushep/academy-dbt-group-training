@@ -4,7 +4,7 @@ with customers as (
         id as customer_id,
         first_name,
         last_name
-    from jaffle_shop.customers
+    from  `sql-training-422508.jaffle_shop.customers`
 
 ),
 
@@ -16,7 +16,7 @@ orders as (
         order_date,
         status
 
-    from jaffle_shop.orders
+    from  `sql-training-422508.jaffle_shop.orders`
 
 ),
 
