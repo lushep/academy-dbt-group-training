@@ -5,5 +5,10 @@ sources:
     tables:
       - name: customers
         identifier: customers
+        columns: 
+          - name: id
+            data_tests:
+              - unique
+              - not_null
       - name: orders
         identifier: orders
