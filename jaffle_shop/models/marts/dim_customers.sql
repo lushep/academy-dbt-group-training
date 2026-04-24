@@ -6,7 +6,7 @@ select * from {{ ref('stg_jaffle_shop__customers') }}
 
 orders as (
 
-select * from dbt_jklingenberg.stg_jaffle_shop__orders
+select * from {{ ref('stg_jaffle_shop__orders') }}
 
 ),
 
